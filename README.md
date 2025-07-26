@@ -15,7 +15,7 @@ Something like :
 }
 ```
 
-It means that the client is compatible with the cryptic-auth host web server version `0.3.0`. And the last `.0` at the end indicates that this is the first release of the client for that version of the client.
+It means that the client is compatible with the cryptic-auth host web server version `0.3.0`. And the last `.0` at the end indicates that this is the first release of the client for that version of the host server.
 
 ## Clients
 
