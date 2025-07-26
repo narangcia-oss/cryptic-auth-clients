@@ -19,7 +19,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/narangcia-oss/cryptic-auth-clients"
+    "url": "https://github.com/narangcia-oss/cryptic-auth-clients/Typescript/plain-ts"
   },
   "dependencies": {
     "axios": "^1.11.0",
