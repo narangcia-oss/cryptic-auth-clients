@@ -44,3 +44,7 @@ It means that the client is compatible with the cryptic-auth host web server ver
 
 - **C#**
   - **csharp-client**: A C# client for cryptic authentication, providing a server-side implementation for C# applications. (This client is currently in development and not yet available.)
+
+## Licence
+
+This project is licensed under the MIT Licence. See the [LICENCE](LICENCE) file for details
