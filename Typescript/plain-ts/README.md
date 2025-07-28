@@ -18,13 +18,13 @@
 ## Installation
 
 ```bash
-npm install @narangcia-oss/cryptic-auth/plain-ts
+npm install @narangcia-oss/cryptic-auth-client-plain-ts
 # or
-yarn add @narangcia-oss/cryptic-auth/plain-ts
+yarn add @narangcia-oss/cryptic-auth-client-plain-ts
 # or
-pnpm add @narangcia-oss/cryptic-auth/plain-ts
+pnpm add @narangcia-oss/cryptic-auth-client-plain-ts
 # or
-bun add @narangcia-oss/cryptic-auth/plain-ts
+bun add @narangcia-oss/cryptic-auth-client-plain-ts
 ```
 
 ---
