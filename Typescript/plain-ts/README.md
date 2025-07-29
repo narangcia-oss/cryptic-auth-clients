@@ -44,7 +44,7 @@ bun add @narangcia-oss/cryptic-auth-client-plain-ts
 ### 1. Initialize the AuthClient
 
 ```typescript
-import { AuthClient } from "@narangcia-oss/cryptic-auth/plain-ts";
+import { AuthClient } from "@narangcia-oss/cryptic-auth-client-plain-ts";
 
 const auth = new AuthClient({
   baseURL: "https://your-cryptic-auth-server.com/api", // Your cryptic-auth server URL
@@ -70,7 +70,7 @@ import {
   generateOAuthState,
   storeOAuthState,
   OAuthCallbackHandler,
-} from "@narangcia-oss/cryptic-auth/plain-ts";
+} from "@narangcia-oss/cryptic-auth-client-plain-ts";
 
 // Step 1: Start OAuth2 login
 const state = generateOAuthState();
@@ -138,7 +138,7 @@ if (result.success) {
 
 ## Types
 
-All types are exported from `@narangcia-oss/cryptic-auth/plain-ts/types`:
+All types are exported from `@narangcia-oss/cryptic-auth-client-plain-ts/types`:
 
 - `AuthTokens`
 - `UserCredentials`
@@ -163,7 +163,7 @@ import {
   generateOAuthState,
   storeOAuthState,
   OAuthCallbackHandler,
-} from "@narangcia-oss/cryptic-auth/plain-ts";
+} from "@narangcia-oss/cryptic-auth-client-plain-ts";
 
 const auth = new AuthClient({ baseURL: "https://your-cryptic-auth-server.com/api" });
 
