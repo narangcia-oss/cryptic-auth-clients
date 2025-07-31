@@ -36,24 +36,24 @@
     "url": "https://github.com/narangcia-oss/cryptic-auth-clients/Typescript/react"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "dependencies": {
-    "@narangcia-oss/cryptic-auth-client-plain-ts": "^0.3.0"
+    "plain-ts": "file:../plain-ts"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "28.0.6",
     "@rollup/plugin-node-resolve": "16.0.1",
     "@rollup/plugin-typescript": "12.1.4",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "rollup": "4.45.1",
+    "@types/react": "19.1.9",
+    "@types/react-dom": "19.1.7",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "rollup": "4.46.2",
     "rollup-plugin-dts": "6.2.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-peer-deps-external": "2.2.4",
     "typescript": "5.8.3",
-    "tslib": "^2.8.1"
+    "tslib": "2.8.1"
   }
 }
