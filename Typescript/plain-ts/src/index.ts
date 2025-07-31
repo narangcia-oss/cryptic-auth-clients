@@ -21,7 +21,7 @@ export type {
   AuthState,
   AuthUser,
   AuthContextValue,
-} from "./types";
+} from "./types/index";
 
 // Utility exports
 export {
@@ -48,4 +48,9 @@ export {
   storeTokens,
   retrieveTokens,
   clearStoredTokens,
+  getTokenExpiration,
+  getTokenPayload,
+  formatTokensForStorage,
+  parseTokensFromStorage,
+  isTokenExpiring,
 } from "./utils/tokens";

@@ -18,6 +18,7 @@ import { extractTokens, isTokenExpired } from "../utils/tokens";
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _isRetry?: boolean;
+  headers?: any;
 }
 
 /**
@@ -65,22 +66,28 @@ export class AuthClient {
   private setupInterceptors(): void {
     // Request interceptor: attach access token
     this.api.interceptors.request.use(
-      (config) => {
+      (config: CustomAxiosRequestConfig): CustomAxiosRequestConfig => {
         if (this.accessToken && config.headers) {
           console.log("[AuthClient] Attaching access token to request.");
           config.headers.Authorization = `Bearer ${this.accessToken}`;
         }
         return config;
       },
-      (error) => {
+      (error: unknown): Promise<never> => {
         console.error("[AuthClient] Request error:", error);
         return Promise.reject(error);
       }
     );
 
     // Response interceptor: handle automatic token refresh
+    interface FailedQueueItem {
+      resolve: (value?: unknown) => void;
+      reject: (reason?: unknown) => void;
+      config: CustomAxiosRequestConfig;
+    }
+
     this.api.interceptors.response.use(
-      (response) => {
+      (response: any): any => {
         console.log(
           "[AuthClient] Response received:",
           response.status,
@@ -88,8 +95,9 @@ export class AuthClient {
         );
         return response;
       },
-      async (error: AxiosError) => {
-        const originalRequest = error.config as CustomAxiosRequestConfig;
+      async (error: AxiosError): Promise<unknown> => {
+        const originalRequest: CustomAxiosRequestConfig =
+          error.config as CustomAxiosRequestConfig;
 
         if (
           error.response?.status === 401 &&
@@ -103,13 +111,18 @@ export class AuthClient {
             console.log(
               "[AuthClient] Token refresh already in progress, queueing request."
             );
-            return new Promise((resolve, reject) => {
-              this.failedQueue.push({
-                resolve,
-                reject,
-                config: originalRequest,
-              });
-            });
+            return new Promise(
+              (
+                resolve: (value?: unknown) => void,
+                reject: (reason?: unknown) => void
+              ) => {
+                this.failedQueue.push({
+                  resolve,
+                  reject,
+                  config: originalRequest,
+                } as FailedQueueItem);
+              }
+            );
           }
 
           this.isRefreshing = true;
@@ -128,9 +141,11 @@ export class AuthClient {
             }
 
             console.log("[AuthClient] Attempting to refresh token...");
-            const response = await this.refreshTokenFlow(this.refreshToken);
-            const newAccessToken = response.access_token;
-            const newRefreshToken = response.refresh_token;
+            const response: AuthTokens = await this.refreshTokenFlow(
+              this.refreshToken
+            );
+            const newAccessToken: string = response.access_token;
+            const newRefreshToken: string = response.refresh_token ?? "";
 
             console.log(
               "[AuthClient] Token refresh successful. New access token set."
@@ -145,7 +160,7 @@ export class AuthClient {
               "[AuthClient] Retrying original request after token refresh."
             );
             return this.api(originalRequest);
-          } catch (refreshError) {
+          } catch (refreshError: unknown) {
             console.error("[AuthClient] Token refresh failed:", refreshError);
             this.clearTokens();
             this.processQueue(null, refreshError);

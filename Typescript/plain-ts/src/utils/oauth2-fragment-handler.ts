@@ -1,4 +1,4 @@
-import type { AuthTokens } from "../types";
+import type { AuthTokens } from "../types/index";
 
 export interface OAuth2FragmentResult {
   success: boolean;

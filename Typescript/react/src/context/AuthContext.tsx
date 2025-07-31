@@ -18,7 +18,7 @@ import {
   retrieveTokens,
   clearStoredTokens,
   storeTokens,
-} from "@narangcia-oss/cryptic-auth-client-plain-ts";
+} from "plain-ts";
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -143,7 +143,16 @@ export function AuthProvider({
 
   const logout = useCallback(() => {
     authClient.clearTokens();
-    clearStoredTokens(config.tokenStorage);
+    const validStorageTypes: Array<"memory" | "localStorage" | "sessionStorage" | undefined> = [
+      "memory",
+      "localStorage",
+      "sessionStorage",
+      undefined,
+    ];
+    const storageType = validStorageTypes.indexOf(config.tokenStorage as any) !== -1
+      ? (config.tokenStorage as "memory" | "localStorage" | "sessionStorage" | undefined)
+      : undefined;
+    clearStoredTokens(storageType);
     setState({
       isAuthenticated: false,
       isLoading: false,
@@ -206,6 +215,7 @@ export function AuthProvider({
         const result = await handler.processCallback();
 
         if (result.success && result.tokens && result.user) {
+          
           setAuthenticatedUser(result.user, result.tokens);
           return;
         }
@@ -214,7 +224,16 @@ export function AuthProvider({
       }
 
       // Check for existing tokens
-      const existingTokens = retrieveTokens(config.tokenStorage);
+      const validStorageTypes: Array<"memory" | "localStorage" | "sessionStorage" | undefined> = [
+        "memory",
+        "localStorage",
+        "sessionStorage",
+        undefined,
+      ];
+      const storageType = validStorageTypes.indexOf(config.tokenStorage as any) !== -1
+        ? (config.tokenStorage as "memory" | "localStorage" | "sessionStorage" | undefined)
+        : undefined;
+      const existingTokens = retrieveTokens(storageType);
       if (existingTokens?.access_token) {
         try {
           const validation = await authClient.validateToken(
@@ -237,7 +256,16 @@ export function AuthProvider({
           }
         } catch (error) {
           // Token validation failed, clear invalid tokens
-          clearStoredTokens(config.tokenStorage);
+          const validStorageTypes: Array<"memory" | "localStorage" | "sessionStorage" | undefined> = [
+            "memory",
+            "localStorage",
+            "sessionStorage",
+            undefined,
+          ];
+          const storageType = validStorageTypes.indexOf(config.tokenStorage as any) !== -1
+            ? (config.tokenStorage as "memory" | "localStorage" | "sessionStorage" | undefined)
+            : undefined;
+          clearStoredTokens(storageType);
         }
       }
 

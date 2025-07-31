@@ -25,14 +25,6 @@ export {
   cleanOAuthURL,
 } from "./utils/oauth";
 
-export {
-  getTokenExpiration,
-  isTokenExpiring,
-  getTokenPayload,
-  formatTokensForStorage,
-  parseTokensFromStorage,
-} from "./utils/tokens";
-
 // Re-export types from the base client for convenience
 export type {
   AuthTokens,

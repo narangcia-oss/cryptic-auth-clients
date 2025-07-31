@@ -1,5 +1,5 @@
 import type { AuthClient } from "../core/client";
-import type { AuthTokens } from "../types";
+import type { AuthTokens, AuthUser } from "../types/index";
 import {
   extractOAuthParams,
   validateOAuthState,
@@ -11,6 +11,7 @@ import { extractTokens } from "./tokens";
 export interface OAuthCallbackResult {
   success: boolean;
   tokens?: AuthTokens;
+  user?: AuthUser;
   error?: string;
 }
 
@@ -90,9 +91,16 @@ export class OAuthCallbackHandler {
       // Extract tokens from response
       const tokens = extractTokens(response);
 
+      // Extract user information from response
+      const user: AuthUser = {
+        id: response.id,
+        identifier: response.identifier,
+      };
+
       return {
         success: true,
         tokens,
+        user,
       };
     } catch (err) {
       const errorMessage =
