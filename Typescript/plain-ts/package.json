@@ -1,6 +1,6 @@
 {
   "name": "@narangcia-oss/cryptic-auth-client-plain-ts",
-  "version": "0.3.0.0",
+  "version": "0.3.00",
   "description": "A TypeScript client for interacting with a cryptic-auth host web server, crafted by Narangcia OSS.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
