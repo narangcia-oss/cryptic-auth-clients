@@ -143,15 +143,17 @@ export function AuthProvider({
 
   const logout = useCallback(() => {
     authClient.clearTokens();
-    const validStorageTypes: Array<"memory" | "localStorage" | "sessionStorage" | undefined> = [
-      "memory",
-      "localStorage",
-      "sessionStorage",
-      undefined,
-    ];
-    const storageType = validStorageTypes.indexOf(config.tokenStorage as any) !== -1
-      ? (config.tokenStorage as "memory" | "localStorage" | "sessionStorage" | undefined)
-      : undefined;
+    const validStorageTypes: Array<
+      "memory" | "localStorage" | "sessionStorage" | undefined
+    > = ["memory", "localStorage", "sessionStorage", undefined];
+    const storageType =
+      validStorageTypes.indexOf(config.tokenStorage as any) !== -1
+        ? (config.tokenStorage as
+            | "memory"
+            | "localStorage"
+            | "sessionStorage"
+            | undefined)
+        : undefined;
     clearStoredTokens(storageType);
     setState({
       isAuthenticated: false,
@@ -215,7 +217,6 @@ export function AuthProvider({
         const result = await handler.processCallback();
 
         if (result.success && result.tokens && result.user) {
-          
           setAuthenticatedUser(result.user, result.tokens);
           return;
         }
@@ -224,15 +225,17 @@ export function AuthProvider({
       }
 
       // Check for existing tokens
-      const validStorageTypes: Array<"memory" | "localStorage" | "sessionStorage" | undefined> = [
-        "memory",
-        "localStorage",
-        "sessionStorage",
-        undefined,
-      ];
-      const storageType = validStorageTypes.indexOf(config.tokenStorage as any) !== -1
-        ? (config.tokenStorage as "memory" | "localStorage" | "sessionStorage" | undefined)
-        : undefined;
+      const validStorageTypes: Array<
+        "memory" | "localStorage" | "sessionStorage" | undefined
+      > = ["memory", "localStorage", "sessionStorage", undefined];
+      const storageType =
+        validStorageTypes.indexOf(config.tokenStorage as any) !== -1
+          ? (config.tokenStorage as
+              | "memory"
+              | "localStorage"
+              | "sessionStorage"
+              | undefined)
+          : undefined;
       const existingTokens = retrieveTokens(storageType);
       if (existingTokens?.access_token) {
         try {
@@ -256,15 +259,17 @@ export function AuthProvider({
           }
         } catch (error) {
           // Token validation failed, clear invalid tokens
-          const validStorageTypes: Array<"memory" | "localStorage" | "sessionStorage" | undefined> = [
-            "memory",
-            "localStorage",
-            "sessionStorage",
-            undefined,
-          ];
-          const storageType = validStorageTypes.indexOf(config.tokenStorage as any) !== -1
-            ? (config.tokenStorage as "memory" | "localStorage" | "sessionStorage" | undefined)
-            : undefined;
+          const validStorageTypes: Array<
+            "memory" | "localStorage" | "sessionStorage" | undefined
+          > = ["memory", "localStorage", "sessionStorage", undefined];
+          const storageType =
+            validStorageTypes.indexOf(config.tokenStorage as any) !== -1
+              ? (config.tokenStorage as
+                  | "memory"
+                  | "localStorage"
+                  | "sessionStorage"
+                  | undefined)
+              : undefined;
           clearStoredTokens(storageType);
         }
       }
