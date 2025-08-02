@@ -18,7 +18,7 @@ import {
   retrieveTokens,
   clearStoredTokens,
   storeTokens,
-} from "plain-ts";
+} from "@narangcia-oss/cryptic-auth-client-plain-ts";
 
 export interface AuthState {
   isAuthenticated: boolean;
